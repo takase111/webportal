@@ -1,8 +1,7 @@
 package jp.ac.hcs.s3a319.zipcode;
 
 import java.util.ArrayList;
-
-import com.sun.tools.javac.util.List;
+import java.util.List;
 
 import lombok.Data;
 
@@ -22,5 +21,5 @@ public class ZipCodeEntity {
 	private String message;
 	
 	/** 郵便番号の情報リスト */
-	private List<ZipCodeData> results = new ArrayList()<ZipCodeData>();
+	private List<ZipCodeData> results = new ArrayList<ZipCodeData>();
 }

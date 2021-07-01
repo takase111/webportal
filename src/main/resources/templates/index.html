@@ -35,6 +35,19 @@
 <link rel="stylesheet" th:href="@{/css/home.css}"
 	href="../static/css/home.css">
 
+<script type="text/javascript">
+            function check(){
+                if (zipcode.value.equals("")){
+                    //郵便番号が未入力
+                    alert("郵便番号を入力してください");   //エラーメッセージを出力
+                    return false;
+                }else{
+                    //郵便番号が入力された場合
+                    return true;
+                }
+            }
+        </script>
+
 </head>
 
 <body th:classappend="${session.isDarkmode} ? 'mode-dark'">
@@ -76,8 +89,30 @@
 							<input type="number" class="form-control" name="zipcode"
 								placeholder="郵便番号 : XXXXXXX"> <span
 								class="input-group-btn">
-								<button type="submit" class="btn btn-info">検索</button>
+								<button type="submit" class="btn btn-info" onClick="return check()">検索</button>
 							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>札幌の天気</h2>
+					<form method="post" th:action="@{/weather}">
+						<div class="input-group">
+							<button type="submit" class="btn btn-info" >もっと詳しく</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>直近のタスク</h2>
+					<form method="post" th:action="@{/task}">
+						<div class="input-group">
+							<button type="submit" class="btn btn-info" >タスク管理へ</button>
 						</div>
 					</form>
 				</div>

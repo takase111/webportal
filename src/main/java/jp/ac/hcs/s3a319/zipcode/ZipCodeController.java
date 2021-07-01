@@ -2,6 +2,7 @@ package jp.ac.hcs.s3a319.zipcode;
 
 import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ZipCodeController {
+	@Autowired
+	private ZipCodeService zipCodeService;
+	
 	/**
 	 * 郵便番号から住所を検索し、結果画面を表示する
 	 * @param zipcode 検索する郵便番号(ハイフン無し)
@@ -22,9 +26,20 @@ public class ZipCodeController {
 	@PostMapping("/zip")
 	public String getZipCode(@RequestParam("zipcode") String zipcode,
 			Principal principal,Model model) {
+		ZipCodeEntity zipCodeEntity = zipCodeService.getZip(zipcode);
+		model.addAttribute("zipCodeEntity",zipCodeEntity);
+		/** 入力された住所をコンソールに表示 */
+		log.info("["+principal.getName()+"]住所検索:"+zipcode);
 		
-			log.info("["+principal.getName()+"]住所検索:"+zipcode);
-			
-		return "zipcode/zipcode";
+		/** 入力チェック */
+		if(zipcode.length() == 7) {
+			model.addAttribute("zipCodeEntity",zipCodeEntity);
+			return "zipcode/zipcode";
+		}else {
+			model.addAttribute("ErMs","半角数字7文字を入力してください");
+			return "index";
+		}
+		
+		
 	}
 }
