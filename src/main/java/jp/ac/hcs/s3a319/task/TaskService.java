@@ -59,4 +59,18 @@ public class TaskService {
 		
 		return rowNumber;
 	}
+	
+	/**
+	 * タスク情報を1件追加する
+	 * @param userId ユーザID
+	 * @param limitday 
+	 * @param comment 
+	 * @param comment 
+	 * @return TaskEntity
+	 */
+	public Date dateFormat(Date limitday) {
+		
+		
+		return limitday;
+	}
 }
