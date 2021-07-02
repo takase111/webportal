@@ -1,5 +1,7 @@
 package jp.ac.hcs.s3a319.task;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -31,5 +33,30 @@ public class TaskService {
 		}
 		
 		return taskEntity;
+	}
+	
+	/**
+	 * タスク情報を1件追加する
+	 * @param userId ユーザID
+	 * @param limitday 
+	 * @param comment 
+	 * @param comment 
+	 * @return TaskEntity
+	 */
+	public int insertOne(String userId, String comment, Date limitday) {
+		int rowNumber = 0;
+		TaskData data = new TaskData();
+		data.setUser_id(userId);
+		data.setComment(comment);
+		data.setLimitday(limitday);
+		
+		try {
+			rowNumber = taskRepository.insertOne(data);
+		} catch (DataAccessException e) {
+			// 例外発生時は、エラーメッセージの詳細を標準エラー出力
+			e.printStackTrace();
+		}
+		
+		return rowNumber;
 	}
 }
