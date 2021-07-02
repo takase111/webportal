@@ -1,9 +1,6 @@
 package jp.ac.hcs.s3a319.task;
 
 import java.security.Principal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,16 +41,9 @@ public class TaskController {
 	public String insertTask(@RequestParam("comment") String comment,
 			@RequestParam("limitday") String limitday, Principal principal,
 			Model model){
-		SimpleDateFormat smdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateLimitday = null;
-		try {
-			dateLimitday = smdf.parse(limitday);
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		
 		//* タスクを追加 */
-		taskService.insertOne(principal.getName(),comment,dateLimitday);
+		taskService.insertOne(principal.getName(),comment,taskService.dateFormat(limitday));
 		
 		log.info("[" + principal.getName() + "]タスク:" + "追加");
 		

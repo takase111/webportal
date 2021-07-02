@@ -1,5 +1,7 @@
 package jp.ac.hcs.s3a319.task;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,16 +63,22 @@ public class TaskService {
 	}
 	
 	/**
-	 * タスク情報を1件追加する
-	 * @param userId ユーザID
+	 * String型をDate型にする
 	 * @param limitday 
 	 * @param comment 
 	 * @param comment 
 	 * @return TaskEntity
 	 */
-	public Date dateFormat(Date limitday) {
+	public Date dateFormat(String limitday) {
+		SimpleDateFormat smdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date dateLimitday = null;
+		try {
+			dateLimitday = smdf.parse(limitday);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 		
-		
-		return limitday;
+		return dateLimitday;
 	}
 }
