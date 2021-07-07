@@ -22,6 +22,7 @@ public class WeatherController {
 	 */
 	@PostMapping("/weather")
 	public String getCityCode(Principal principal, Model model){
+		
 		String cityCode = "016010";
 		WeatherEntity weatherEntity = weatherService.getWeather(cityCode);
 		model.addAttribute("weatherEntity", weatherEntity);

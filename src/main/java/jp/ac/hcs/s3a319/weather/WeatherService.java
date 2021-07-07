@@ -25,11 +25,9 @@ public class WeatherService {
 
 	/**
 	 * 気象情報取得業務ロジック
-	 * 
 	 * @param cityCode 都市コード
 	 * @return WeatherEntity
 	 */
-
 	public WeatherEntity getWeather(String cityCode) {
 		// APIへアクセスして、結果を取得
 		String json = restTemplate.getForObject(URL, String.class, cityCode);

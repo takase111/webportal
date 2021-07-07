@@ -95,7 +95,7 @@
 		   	<tbody>
 			    <tr th:each="task : ${taskEntity.tasklist}">
 			      <td scope="row">
-			      	<a th:href="@{'/task/delete/' + ${task.id} }" onclick="ohayou()">
+			      	<a th:href="@{'/task/delete/' + ${task.id} }" onclick="button_click()">
 							<span th:text="${task.comment}" ></span>
 					</a>
 			      </td>

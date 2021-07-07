@@ -41,6 +41,8 @@ public class TaskController {
 	
 	/**
 	 * タスクを追加する
+	 * @param comment タスク名
+	 * @param limitday 期限日
 	 * @param model
 	 * @return 結果画面 - タスク
 	 */
@@ -59,11 +61,12 @@ public class TaskController {
 	
 	/**
 	 * タスクを削除する
+	 * @param id カラムid
 	 * @param model
 	 * @return 結果画面 - タスク
 	 */
 	@GetMapping("/task/delete/{id}")
-	public String taskDelete(@PathVariable int id , Principal principal, Model model) {
+	public String deleteTask(@PathVariable int id , Principal principal, Model model) {
 		//* タスクを追加 */
 		taskService.deleteOne(id);
 		

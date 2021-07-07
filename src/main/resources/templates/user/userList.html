@@ -2,10 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-
 <meta charset="UTF-8">
 <title>WebPortal Main</title>
-
 <!-- モバイル設定 -->
 <meta id="viewport" name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,15 +14,14 @@
 <meta name="apple-mobile-web-app-title" content="WebPortal">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 <!-- アイコン設定 -->
 <link rel="icon" th:href="@{/img/favicon.ico}" sizes="192x192"
 	href="../static/img/favicon.ico">
 <link rel="shortcut icon" th:href="@{/img/favicon.ico}">
 <link rel="apple-touch-icon" th:href="@{/img/favicon.ico}">
-<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}" sizes="192x192">
+<link rel="apple-touch-icon" th:href="@{/img/favicon.ico}"
+	sizes="192x192">
 <link rel="apple-touch-icon" th:href="@{/img/favicon.ico}" sizes="58x58">
-
 <!-- スタイル設定 -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -34,24 +31,10 @@
 	href="../static/css/ress.css">
 <link rel="stylesheet" th:href="@{/css/home.css}"
 	href="../static/css/home.css">
-
-<script type="text/javascript">
-            function check(){
-                if (zipcode.value.equals("")){
-                    //郵便番号が未入力
-                    alert("郵便番号を入力してください");   //エラーメッセージを出力
-                    return false;
-                }else{
-                    //郵便番号が入力された場合
-                    return true;
-                }
-            }
-        </script>
+<script th:src="@{/js/task.js}"></script>
 
 </head>
-
 <body th:classappend="${session.isDarkmode} ? 'mode-dark'">
-
 	<!-- 共通ヘッダ -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-info">
 		<h1>
@@ -76,73 +59,38 @@
 			</ul>
 		</div>
 	</nav>
-
 	<!-- コンテンツ -->
-	<div class="container">
-		<div class="row">
+	<h2>タスク管理</h2>
 
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>住所検索 - 郵便番号</h2>
-					<form method="post" th:action="@{/zip}">
-						<div class="input-group">
-							<input type="number" class="form-control" name="zipcode"
-								placeholder="郵便番号 : XXXXXXX"> <span
-								class="input-group-btn">
-								<button type="submit" class="btn btn-info" onClick="return check()">検索</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>札幌の天気</h2>
-					<form method="post" th:action="@{/weather}">
-						<div class="input-group">
-							<button type="submit" class="btn btn-info" >もっと詳しく</button>
-						</div>
-					</form>
-				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>直近のタスク</h2>
-					<form method="post" th:action="@{/task}">
-						<div class="input-group">
-							<button type="submit" class="btn btn-info" >タスク管理へ</button>
-						</div>
-					</form>
-				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="content-box">
-					<h2>飲食店検索 - 北海道</h2>
-					<form method="post" th:action="@{/gourmet}">
-						<div class="input-group">
-							<input type="text" class="form-control" name="shopname"
-								placeholder="キーワード入力"> <span
-								class="input-group-btn">
-								<button type="submit" class="btn btn-info" >検索</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-			
-			<div class="col-sm-6" role="presentation" sec:authoriz="hasRole('ADMIN')">
-				<!-- 管理者のみのコンテンツ -->
-				<div class="content-box">
-					<h2>ユーザ管理</h2>
-					<form method="get" th:action="@{/user/list}">
-						<button type="submit" class="btn btn-success">ユーザ管理へ</button>
-					</form>
-				</div>
-			</div>
-	</div>
+
+
+	<hr>
+
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">内容</th>
+				<th scope="col">期限</th>
+				<th scope="col">内容</th>
+				<th scope="col">期限</th>
+				<th scope="col">内容</th>
+				<th scope="col">期限</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${userEntity.userList}">
+				<td scope="row"><span th:text="${user.user_id}"></span></td>
+				<td scope="row"><span th:text="${user.enabled}"></span> </td>
+				<td scope="row"><span th:text="${user.user_name}"></span></td>
+				<td scope="row"><span th:text="${user.darkmode}"></span></td>
+				<td scope="row"><span th:text="${user.role}"></span></td>
+				<td scope="row"><span th:text="${user.limitday}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+
+
 
 	<!-- 共通スクリプト -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -156,5 +104,6 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>
