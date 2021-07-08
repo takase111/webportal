@@ -68,7 +68,14 @@ public class UserController {
 		}
 		
 		//追加処理を実装する
+		UserData data = userService.refillToData(form);
+		boolean result = userService.insertOne(data);
+		if(result) {
+			model.addAttribute("message","ユーザを登録しました");
+		}else {
+			model.addAttribute("errorMessage","ユーザ登録に失敗しました。操作をやり直してください");
+		}
 		
-		return getUserList(principal,model);
+		return getUserList(principal, model);
 	}
 }
