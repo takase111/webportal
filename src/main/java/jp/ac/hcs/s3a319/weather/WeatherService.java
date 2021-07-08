@@ -52,6 +52,10 @@ public class WeatherService {
 				// DataクラスをEnecityの配列に追加
 				weatherEntity.getForecasts().add(data);
 			}
+			
+			// textパラメータの抽出
+			String text = node.get("description").get("text").asText();
+			weatherEntity.setText(text);
 
 		} catch (IOException e) {
 			// 例外発生時は、エラーメッセージの詳細を標準エラー出力

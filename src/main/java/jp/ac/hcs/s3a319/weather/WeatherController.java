@@ -25,7 +25,10 @@ public class WeatherController {
 		
 		String cityCode = "016010";
 		WeatherEntity weatherEntity = weatherService.getWeather(cityCode);
+		String text = weatherEntity.getText();
+		
 		model.addAttribute("weatherEntity", weatherEntity);
+		model.addAttribute("text", text);
 		
 		log.info("[" + principal.getName() + "]天気検索:" + cityCode);
 		return "weather/weather";

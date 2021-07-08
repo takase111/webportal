@@ -15,5 +15,5 @@ public class WeatherData {
 	
 	/** 予報 */
 	private String telop;
-	
+
 }

@@ -74,17 +74,8 @@
 	</form>
 	
 	<hr>
-	
-	<!-- テーブルにする前のコード
-	<ul th:each="task : ${taskEntity.tasklist}">
-		<li>
-			<a th:href="@{'/task/delete/' + ${task.id}}">
-				<span th:text="${task.comment}"></span>
-			</a>
-			<span th:text="${task.limitday}"></span>
-		</li>
-	-->
 		
+		<div class="content-box">
 		<table class="table">
 			<thead class="thead-dark">
 			    <tr>
@@ -105,10 +96,8 @@
 			    </tr>
 			</tbody>
 		 </table>
+		 </div>
 		 
-	<!-- テーブルにする前のコード 
-	</ul>
-	-->
 	
 	<hr>
 	

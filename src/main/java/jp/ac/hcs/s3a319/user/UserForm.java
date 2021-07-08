@@ -9,23 +9,25 @@ import lombok.Data;
  */
 @Data
 public class UserForm {
-///**ユーザＩＤ（メールアドレス）*/
-//	@NotBlank(message = "{require_check}")
-//	@Email(message = "{email_check}")
-//	private String user_id;
-//	
-//	/**パスワード*/
-//	@NotBlank(message = "{require_check}")
-//	private String password;
-//	
-//	/**ユーザ名*/
-//	@NotBlank(message = "{require_check}")
-//	private String user_name;
-//	
-//	/**ダークモードフラグ*/
-//	private boolean darkmode;
-//	
-//	/**権限*/
-//	@NotBlank(message = "{require_check}")
-//	private String role;
+/**ユーザＩＤ（メールアドレス）*/
+	@NotBlank(message = "{require_check}")
+	@Email(message = "{email_check}")
+	private String user_id;
+	
+	/**パスワード*/
+	@NotBlank(message = "{require_check}")
+	@Length()
+	@pattern()
+	private String password;
+	
+	/**ユーザ名*/
+	@NotBlank(message = "{require_check}")
+	private String user_name;
+	
+	/**ダークモードフラグ*/
+	private boolean darkmode;
+	
+	/**権限*/
+	@NotBlank(message = "{require_check}")
+	private String role;
 }
