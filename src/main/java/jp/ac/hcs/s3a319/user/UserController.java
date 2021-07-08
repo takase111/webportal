@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -78,4 +79,42 @@ public class UserController {
 		
 		return getUserList(principal, model);
 	}
+	
+	/**
+	 * ユーザ詳細画面を表示する
+	 * @param user_id 検索するユーザID
+	 * @param princcipal ログイン画面
+	 * @param model
+	 * @return ユーザ詳細情報画面
+	 */
+	@GetMapping("/user/detail/{id}")
+	public String getUserDetail(@PathVariable("id") String user_id,Principal principal,Model model){
+		
+		log.info("[" + principal.getName() + "]ユーザ:" + user_id);
+		//1.ユーザIDの必須チェック(null値は除く)
+		if(user_id.equals(null)) {
+			return getUserList(principal, model);
+		}
+		
+		//2.ユーザIDの妥当性チェック(メールアドレス)
+		if(!(user_id.contains("@"))) {
+			return getUserList(principal, model);
+		}
+		
+		//3.ユーザ情報の取得(Service)
+		UserData data = userService.selectOne(user_id);
+		
+		//4.ユーザ情報の存在チェック(無効なユーザIDで遷移しない)
+		UserData myData = userService.selectOne(principal.getName());
+		if( !(myData.getRole().equals("ROLE_ADMIN")) ) {
+			return getUserList(principal, model);
+		}
+		
+		/** ロガー */
+		log.info("[" + principal.getName() + "]ユーザ:" + "表示");
+	
+		model.addAttribute("userData",data);
+		return "user/detail";
+	}
+	
 }

@@ -66,5 +66,24 @@ public class UserService {
 		data.setEnabled(true);
 		return data;
 	}
+
+	/**
+	 * ユーザ情報を１件取得する
+	 * @return data
+	 */
+	public UserData selectOne(String user_id) {
+		UserData data;
+		try {
+			data = userRepository.selectOne(user_id);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			data = null;
+		}
+		
+		return data;
+		
+	}
+	
+	
 	
 }
