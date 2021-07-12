@@ -60,14 +60,14 @@
 	<div class="container">
 		<div class="content-box">
 			<h1>北海道グルメ</h1>
-			<h2>「」の検索結果</h2>
+			<h2 th:each="shopName : ${shopName}" th:text="${shopName}">」</h2>
 			<!-- 基本１件だが、API構造に従い繰り返し構文とする -->
-			<ul th:each="forecast : ${shopEntity.forecasts}" >
+			<ul th:each="shopList : ${shopEntity.forecasts}" >
 					<hr>
-			        <li><h4><img th:src="${forecast.logo_image}"></img></h4></li>
-			        <li><a th:href="${forecast.url}" target="new" th:text="${forecast.name}"></a>
-			        <li><a th:href="'https://www.google.com/maps/search/?api=1&query='+${forecast.address}" target="new" th:text="${forecast.address}"></a>
-			        <li><p><span th:text="${forecast.access}"></span></p></li>
+			        <li><h4><img th:src="${shopList.logo_image}"></img></h4></li>
+			        <li><a th:href="${shopList.url}" target="new" th:text="${shopList.name}"></a></li>
+			        <li><a th:href="'https://www.google.com/maps/search/?api=1&query='+${shopList.address}" target="new" th:text="${shopList.address}"></a></li>
+			        <li><span th:text="${shopList.access}"></span></li>
 			
 			</ul>
 		</div>

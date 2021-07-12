@@ -17,6 +17,7 @@ public class WeatherController {
 	
 	/**
 	 * 札幌の天気を表示する
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 結果画面 - 天気情報
 	 */

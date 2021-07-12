@@ -25,6 +25,7 @@ public class TaskController {
 	
 	/**
 	 * タスクを表示する
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 結果画面 - タスク
 	 */
@@ -43,6 +44,7 @@ public class TaskController {
 	 * タスクを追加する
 	 * @param comment タスク名
 	 * @param limitday 期限日
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 結果画面 - タスク
 	 */
@@ -62,6 +64,7 @@ public class TaskController {
 	/**
 	 * タスクを削除する
 	 * @param id カラムid
+	 * @param principal ログイン情報
 	 * @param model
 	 * @return 結果画面 - タスク
 	 */

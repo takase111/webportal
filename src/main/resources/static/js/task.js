@@ -1,14 +1,8 @@
-
-function button_click() {
-
-	if (confirm('削除しますか')) {
-		
-		    console.log('OKボタンが押されました。')
-
-		} else {
-			
-		    console.log('キャンセルボタンが押されました。')
-
-		}
-		
+function check(){
+	var result = window.confirm("このタスクを削除してもよろしいですか？");
+	if (result) {
+		return true;
+	} else {
+		return false;
+	}
 }

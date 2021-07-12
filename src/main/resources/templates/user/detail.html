@@ -35,7 +35,7 @@
 	href="../static/css/ress.css">
 <link rel="stylesheet" th:href="@{/css/home.css}"
 	href="../static/css/home.css">
-<script th:src="@{/js/task.js}"></script>
+<script th:src="@{/js/detail.js}"></script>
 </head>
 
 <body th:classappend="${session.isDarkmode} ? 'mode-dark'">
@@ -109,11 +109,11 @@
 						<span class="text-danger" th:if="${#fields.hasErrors('role')}"
 							th:errors="*{role}">role error</span>
 					</div>
-					<button class="btn btn-primary" type="submit" name="update">更新</button>
+					<button class="btn btn-primary" type="submit" name="update" onclick="return check()">更新</button>
 				</form>
 					<hr>
 				<form method="post" th:action="@{/user/delete}" th:object="${userData}">
-					<input type="hidden" th:value="*{user_id}">
+					<input type="hidden" th:value="*{user_id}" name="user_id">
 					<button class="btn btn-danger" type="submit" name="delete">削除</button>
 				</form>
 			</div>

@@ -18,6 +18,7 @@ public class ShopController {
 	
 	/**
 	 * 北海道のグルメ検索情報を表示する
+	 * @param principal ログイン情報
 	 * @param shopname 検索ワード
 	 * @param model
 	 * @return 結果画面 - グルメ情報
@@ -28,6 +29,7 @@ public class ShopController {
 		
 		String large_service_area = "SS40";
 		ShopEntity shopEntity = gourmetService.getShops(shopname,large_service_area);
+		model.addAttribute("shopName", "「"+shopname+"」の検索結果");
 		model.addAttribute("shopEntity", shopEntity);
 		
 		log.info("[" + principal.getName() + "]グルメ検索:" + "表示");
