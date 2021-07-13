@@ -35,7 +35,18 @@
 <link rel="stylesheet" th:href="@{/css/home.css}"
 	href="../static/css/home.css">
 
-
+<script type="text/javascript">
+            function check(){
+                if (zipcode.value.equals("")){
+                    //郵便番号が未入力
+                    alert("郵便番号を入力してください");   //エラーメッセージを出力
+                    return false;
+                }else{
+                    //郵便番号が入力された場合
+                    return true;
+                }
+            }
+        </script>
 
 </head>
 
@@ -44,7 +55,7 @@
 	<!-- 共通ヘッダ -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-info">
 		<h1>
-			<a class="navbar-brand title-font" th:href="@{/}">就活トップ画面</a>
+			<a class="navbar-brand title-font" th:href="@{/}">WebPortal.com</a>
 		</h1>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarToggler" aria-controls="navbarToggler"
@@ -65,9 +76,70 @@
 			</ul>
 		</div>
 	</nav>
-	
+
 	<!-- コンテンツ -->
-	
+	<div class="container">
+		<div class="row">
+
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>住所検索 - 郵便番号</h2>
+					<form method="post" th:action="@{/zip}">
+						<div class="input-group">
+							<input type="number" class="form-control" name="zipcode"
+								placeholder="郵便番号 : XXXXXXX"> <span
+								class="input-group-btn">
+								<button type="submit" class="btn btn-info" onClick="return check()">検索</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>札幌の天気</h2>
+					<form method="post" th:action="@{/weather}">
+							<button type="submit" class="btn btn-info" >もっと詳しく</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>直近のタスク</h2>
+					<form method="post" th:action="@{/task}">
+							<button type="submit" class="btn btn-info" >タスク管理へ</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>飲食店検索 - 北海道</h2>
+					<form method="post" th:action="@{/gourmet}">
+						<div class="input-group">
+							<input type="text" class="form-control" name="shopname"
+								placeholder="キーワード入力"> <span
+								class="input-group-btn">
+								<button type="submit" class="btn btn-info" >検索</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col-sm-6" role="presentation" sec:authoriz="hasRole('ADMIN')">
+				<!-- 管理者のみのコンテンツ -->
+				<div class="content-box">
+					<h2>ユーザ管理</h2>
+					<form method="get" th:action="@{/user/list}">
+						<button type="submit" class="btn btn-info">ユーザ管理へ</button>
+					</form>
+				</div>
+			</div>
+	</div>
+</div>
 
 	<!-- 共通スクリプト -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
